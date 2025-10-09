@@ -12,76 +12,75 @@ import StarBorder from "@/components/StarBorder";
 import ScrollFloat from "@/components/ScrollFloat";
 import TiltedCard from "@/components/TiltedCard";
 import BlurText from "@/components/BlurText";
-import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
-import { FocusCards } from "@/components/ui/focus-cards";
 import CircularGallery from "@/components/CircularGallery";
 import LogoLoop from "@/components/LogoLoop";
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
-import { Button } from "@/components/ui/moving-border";
+import MovingBorderDemo from "@/components/MovingBorderDemo";
+import FocusCardsDemo from "@/components/FocusCardsDemo";
 
-function MovingBorderDemo() {
-  return (
-    <div className="flex justify-center md:justify-start mt-6 sm:mt-8">
-      <Button
-        onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-        borderRadius="9999px"
-        // ⬇️ matikan w/h default & bikin tombol mengikuti isi
-        containerClassName="!w-auto !h-auto !p-[1px] rounded-full"
-        // ⬇️ isi tombol (konten)
-        className="
-          inline-flex items-center justify-center
-          px-8 sm:px-10 py-3 sm:py-3.5
-          whitespace-nowrap leading-none
-          text-sm sm:text-base font-semibold
-          text-[#03fa97] hover:text-white
-          bg-[#06090E]/90 backdrop-blur-md
-          border border-[#03fa97]/40 hover:border-[#03fa97]/80
-          rounded-full
-          shadow-[0_0_8px_rgba(3,250,151,0.35)]
-          hover:shadow-[0_0_16px_rgba(3,250,151,0.6)]
-          transition-all duration-300 ease-in-out
-        "
-        // ⬇️ warna “glow” si titik yang muter
-        borderClassName="bg-[radial-gradient(#03fa97_40%,transparent_60%)] opacity-80"
-        duration={4000}
-      >
-        Lihat Portofolio Saya
-      </Button>
-    </div>
-  );
-}
+// function MovingBorderDemo() {
+//   return (
+//     <div className="flex justify-center md:justify-start mt-6 sm:mt-8">
+//       <Button
+//         onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+//         borderRadius="9999px"
+//         // ⬇️ matikan w/h default & bikin tombol mengikuti isi
+//         containerClassName="!w-auto !h-auto !p-[1px] rounded-full"
+//         // ⬇️ isi tombol (konten)
+//         className="
+//           inline-flex items-center justify-center
+//           px-8 sm:px-10 py-3 sm:py-3.5
+//           whitespace-nowrap leading-none
+//           text-sm sm:text-base font-semibold
+//           text-[#03fa97] hover:text-white
+//           bg-[#06090E]/90 backdrop-blur-md
+//           border border-[#03fa97]/40 hover:border-[#03fa97]/80
+//           rounded-full
+//           shadow-[0_0_8px_rgba(3,250,151,0.35)]
+//           hover:shadow-[0_0_16px_rgba(3,250,151,0.6)]
+//           transition-all duration-300 ease-in-out
+//         "
+//         // ⬇️ warna “glow” si titik yang muter
+//         borderClassName="bg-[radial-gradient(#03fa97_40%,transparent_60%)] opacity-80"
+//         duration={4000}
+//       >
+//         Lihat Portofolio Saya
+//       </Button>
+//     </div>
+//   );
+// }
 
 /* ==== DEMO WRAPPER UNTUK FocusCards (biarkan, hanya pembungkus data) ==== */
-function FocusCardsDemo() {
-  const cards = [
-    {
-      title: "Undangan Pernikahan Digital",
-      src: "/assets/projects/Project1.svg",
-    },
-    {
-      title: "Aplikasi AbsenKuy",
-      src: "/assets/projects/Project2.svg",
-    },
-    {
-      title: "Mobile App Nita",
-      src: "/assets/projects/Project3.svg",
-    },
-    {
-      title: "Web App Nusafin",
-      src: "/assets/projects/Project4.svg",
-    },
-    {
-      title: "Mobile App Otto Parking",
-      src: "/assets/projects/Project5.svg",
-    },
-    {
-      title: "Mobile App Otto Parking",
-      src: "/assets/projects/Project6.svg",
-    },
-  ];
+// function FocusCardsDemo() {
+//   const cards = [
+//     {
+//       title: "Undangan Pernikahan Digital",
+//       src: "/assets/projects/Project1.svg",
+//     },
+//     {
+//       title: "Aplikasi AbsenKuy",
+//       src: "/assets/projects/Project2.svg",
+//     },
+//     {
+//       title: "Mobile App Nita",
+//       src: "/assets/projects/Project3.svg",
+//     },
+//     {
+//       title: "Web App Nusafin",
+//       src: "/assets/projects/Project4.svg",
+//     },
+//     {
+//       title: "Mobile App Otto Parking",
+//       src: "/assets/projects/Project5.svg",
+//     },
+//     {
+//       title: "Mobile App Otto Parking",
+//       src: "/assets/projects/Project6.svg",
+//     },
+//   ];
 
-  return <FocusCards cards={cards} />;
-}
+//   return <FocusCards cards={cards} />;
+// }
 
 const techLogos = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
@@ -101,7 +100,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#06090E] text-white overflow-x-hidden">
       {/* cursor efek */}
-      {/* <SplashCursor /> */}
+      <SplashCursor />
 
       <section className="relative w-full min-h-screen overflow-hidden bg-[#06090E] text-white">
         {/* BG Silk */}
