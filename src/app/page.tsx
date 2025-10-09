@@ -19,7 +19,7 @@ import LogoLoop from "@/components/LogoLoop";
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
 import { Button } from "@/components/ui/moving-border";
 
-export function MovingBorderDemo() {
+function MovingBorderDemo() {
   return (
     <div className="flex justify-center md:justify-start mt-6 sm:mt-8">
       <Button
@@ -52,7 +52,7 @@ export function MovingBorderDemo() {
 }
 
 /* ==== DEMO WRAPPER UNTUK FocusCards (biarkan, hanya pembungkus data) ==== */
-export function FocusCardsDemo() {
+function FocusCardsDemo() {
   const cards = [
     {
       title: "Undangan Pernikahan Digital",
