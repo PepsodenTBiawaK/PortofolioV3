@@ -119,3 +119,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* sembunyikan indikator scrollbar (tetap bisa di-scroll) */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;             /* Chrome/Safari/Opera */
+}

@@ -255,7 +255,7 @@ export default function HomePage() {
                 {/* Card 1 */}
                 <AnimatedContent distance={40} direction="vertical" duration={0.8} ease="power2.out" initialOpacity={0.0} animateOpacity threshold={0.15}>
                   <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-4 text-center">
-                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#03fa97]">2+</div>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#03fa97]">1+</div>
                     <div className="text-xs sm:text-sm text-gray-300">Tahun di UI/UX</div>
                   </div>
                 </AnimatedContent>
@@ -411,14 +411,15 @@ export default function HomePage() {
           </ScrollFloat>
 
           {/* Subtitle (opsional) */}
-          <p className="mt-4 text-center text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">Bukti pembelajaran & pencapaian yang relevan dengan UI/UX dan Front-End.</p>
+          <p className="mt-4 text-center text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">Bukti pembelajaran & pencapaian yang relevan dengan bidang saya.</p>
 
           {/* Grid kartu sertifikat (tanpa scroll di dalam) */}
 
           <div className="mt-10 md:mt-12 grid grid-cols-12 gap-6 md:gap-8 ">
             {[
-              { title: "Figma (Skill Test Certification)", desc: "Sribu Academy", img: "/assets/certificates/Certificates1.svg", link: "https://academy.sribu.com/certificate/SRB-230925-14D8-1048" },
-              { title: "Intro To UI/UX Design", desc: "Purwadhika Digital Technology School", img: "/assets/certificates/Certificates2.svg", link: "https://purwadhika.com/verify-certificate/PWDK-ITUUDFC-250923-0000002" },
+              { title: "Figma (Skill Test Certification)", desc: "Sribu Academy", img: "/assets/certificates/Certificate1.svg", link: "https://academy.sribu.com/certificate/SRB-230925-14D8-1048" },
+              { title: "Intro To UI/UX Design", desc: "Purwadhika Digital Technology School", img: "/assets/certificates/Certificate2.svg", link: "https://purwadhika.com/verify-certificate/PWDK-ITUUDFC-250923-0000002" },
+              { title: "Intro To UI/UX Design", desc: "Le Wagon", img: "/assets/certificates/Certificate3.svg", link: "https://app.lewagon.school/certificates/qsdaxvpjbw" },
               
             ].map((c, i) => (
               <div key={i} className="col-span-12 sm:col-span-6 lg:col-span-4">
