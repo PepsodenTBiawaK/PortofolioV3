@@ -37,7 +37,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#06090E] text-white overflow-x-hidden">
       <SplashScreen
-        logoSrc="/assets/images/logo.png"     // boleh ganti ke logo kamu
+        logoSrc="/logo.png"     // boleh ganti ke logo kamu
         accent="#03fa97"
         minDuration={1200}
         maxWait={5000}
