@@ -40,7 +40,7 @@ export default function HomePage() {
         logoSrc="/assets/images/logo.png"     // boleh ganti ke logo kamu
         accent="#03fa97"
         minDuration={1200}
-        maxWait={3500}
+        maxWait={5000}
         caption="Loading your experience…"
       />
 
