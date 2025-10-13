@@ -1,6 +1,5 @@
 "use client";
 
-/* ==== IMPORTS (komponen kamu) ==== */
 import Lanyard from "@/components/Lanyard";
 import RotatingText from "@/components/RotatingText";
 import ScrambledText from "@/components/ScrambledText";
@@ -17,70 +16,8 @@ import LogoLoop from "@/components/LogoLoop";
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
 import MovingBorderDemo from "@/components/MovingBorderDemo";
 import FocusCardsDemo from "@/components/FocusCardsDemo";
+import SplashScreen from "@/components/SplashScreen";
 
-// function MovingBorderDemo() {
-//   return (
-//     <div className="flex justify-center md:justify-start mt-6 sm:mt-8">
-//       <Button
-//         onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-//         borderRadius="9999px"
-//         // ⬇️ matikan w/h default & bikin tombol mengikuti isi
-//         containerClassName="!w-auto !h-auto !p-[1px] rounded-full"
-//         // ⬇️ isi tombol (konten)
-//         className="
-//           inline-flex items-center justify-center
-//           px-8 sm:px-10 py-3 sm:py-3.5
-//           whitespace-nowrap leading-none
-//           text-sm sm:text-base font-semibold
-//           text-[#03fa97] hover:text-white
-//           bg-[#06090E]/90 backdrop-blur-md
-//           border border-[#03fa97]/40 hover:border-[#03fa97]/80
-//           rounded-full
-//           shadow-[0_0_8px_rgba(3,250,151,0.35)]
-//           hover:shadow-[0_0_16px_rgba(3,250,151,0.6)]
-//           transition-all duration-300 ease-in-out
-//         "
-//         // ⬇️ warna “glow” si titik yang muter
-//         borderClassName="bg-[radial-gradient(#03fa97_40%,transparent_60%)] opacity-80"
-//         duration={4000}
-//       >
-//         Lihat Portofolio Saya
-//       </Button>
-//     </div>
-//   );
-// }
-
-/* ==== DEMO WRAPPER UNTUK FocusCards (biarkan, hanya pembungkus data) ==== */
-// function FocusCardsDemo() {
-//   const cards = [
-//     {
-//       title: "Undangan Pernikahan Digital",
-//       src: "/assets/projects/Project1.svg",
-//     },
-//     {
-//       title: "Aplikasi AbsenKuy",
-//       src: "/assets/projects/Project2.svg",
-//     },
-//     {
-//       title: "Mobile App Nita",
-//       src: "/assets/projects/Project3.svg",
-//     },
-//     {
-//       title: "Web App Nusafin",
-//       src: "/assets/projects/Project4.svg",
-//     },
-//     {
-//       title: "Mobile App Otto Parking",
-//       src: "/assets/projects/Project5.svg",
-//     },
-//     {
-//       title: "Mobile App Otto Parking",
-//       src: "/assets/projects/Project6.svg",
-//     },
-//   ];
-
-//   return <FocusCards cards={cards} />;
-// }
 
 const techLogos = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
@@ -99,6 +36,14 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-[#06090E] text-white overflow-x-hidden">
+      <SplashScreen
+        logoSrc="/assets/images/logo.png"     // boleh ganti ke logo kamu
+        accent="#03fa97"
+        minDuration={1200}
+        maxWait={3500}
+        caption="Loading your experience…"
+      />
+
       {/* cursor efek */}
       <SplashCursor />
 
@@ -318,7 +263,7 @@ export default function HomePage() {
 
             {/* Alternatif tambahan chips (opsional, feel free to remove) */}
             <div className="mt-6 flex flex-wrap justify-center gap-2 sm:gap-3 text-center">
-              {["UI Design", "UX Research", "Wireframing", "Prototyping", "Design System", "Full Stack", "Mobile Dev"].map((tag) => (
+              {[  "Wireframing", "Prototyping", "UX Research", "UI Design", "Design System", "Full Stack", "Mobile Dev"].map((tag) => (
                 <span key={tag} className="px-3 py-1.5 rounded-full text-xs sm:text-sm bg-white/5 border border-white/10 text-gray-200 hover:bg-[#03fa97]/10 transition">
                   {tag}
                 </span>
