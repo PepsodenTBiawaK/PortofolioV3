@@ -17,7 +17,7 @@ import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/s
 import MovingBorderDemo from "@/components/MovingBorderDemo";
 import FocusCardsDemo from "@/components/FocusCardsDemo";
 import SplashScreen from "@/components/SplashScreen";
-
+import { SiInstagram, SiLinkedin, SiGithub, SiDribbble, SiBehance, SiX } from "react-icons/si";
 
 const techLogos = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
@@ -25,6 +25,29 @@ const techLogos = [
   { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
   { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
 ];
+function SocialButton({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={label}
+      className="
+        group inline-flex items-center gap-2
+        px-4 py-2 rounded-full
+        border border-[#03fa97]/40 bg-white/5
+        text-white/90 hover:text-white
+        hover:bg-[#03fa97]/10 hover:border-[#03fa97]/80
+        transition-all duration-300
+        shadow-[0_0_0px_rgba(3,250,151,0)]
+        hover:shadow-[0_0_16px_rgba(3,250,151,0.35)]
+      "
+    >
+      <span className="text-xl">{children}</span>
+      <span className="text-sm sm:text-base font-medium tracking-wide">{label}</span>
+    </a>
+  );
+}
 
 /* ==== PAGE ==== */
 export default function HomePage() {
@@ -37,7 +60,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#06090E] text-white overflow-x-hidden">
       <SplashScreen
-        logoSrc="/logo.png"     // boleh ganti ke logo kamu
+        logoSrc="/logo.png" // boleh ganti ke logo kamu
         accent="#03fa97"
         minDuration={1200}
         maxWait={5000}
@@ -263,7 +286,7 @@ export default function HomePage() {
 
             {/* Alternatif tambahan chips (opsional, feel free to remove) */}
             <div className="mt-6 flex flex-wrap justify-center gap-2 sm:gap-3 text-center">
-              {[  "Wireframing", "Prototyping", "UX Research", "UI Design", "Design System", "Full Stack", "Mobile Dev"].map((tag) => (
+              {["Wireframing", "Prototyping", "UX Research", "UI Design", "Design System", "Full Stack", "Mobile Dev"].map((tag) => (
                 <span key={tag} className="px-3 py-1.5 rounded-full text-xs sm:text-sm bg-white/5 border border-white/10 text-gray-200 hover:bg-[#03fa97]/10 transition">
                   {tag}
                 </span>
@@ -365,7 +388,6 @@ export default function HomePage() {
               { title: "Figma (Skill Test Certification)", desc: "Sribu Academy", img: "/assets/certificates/Certificate1.svg", link: "https://academy.sribu.com/certificate/SRB-230925-14D8-1048" },
               { title: "Intro To UI/UX Design", desc: "Purwadhika Digital Technology School", img: "/assets/certificates/Certificate2.svg", link: "https://purwadhika.com/verify-certificate/PWDK-ITUUDFC-250923-0000002" },
               { title: "Intro To UI/UX Design", desc: "Le Wagon", img: "/assets/certificates/Certificate3.svg", link: "https://app.lewagon.school/certificates/qsdaxvpjbw" },
-              
             ].map((c, i) => (
               <div key={i} className="col-span-12 sm:col-span-6 lg:col-span-4">
                 <AnimatedContent distance={50} direction="vertical" duration={0.8} ease="power2.out" initialOpacity={0.0} animateOpacity threshold={0.15} delay={i * 0.05}>
@@ -408,6 +430,45 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* =========================================
+    SECTION: SOCIALS
+    - Heading konsisten (ScrollFloat)
+    - Tombol ikon/link sosial
+  ========================================= */}
+      <section id="socials" className="relative py-16 sm:py-20 bg-[#06090E] text-white">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Heading */}
+          <ScrollFloat
+            animationDuration={1}
+            ease="back.inOut(2)"
+            scrollStart="center bottom+=50%"
+            scrollEnd="bottom bottom-=40%"
+            stagger={0.06}
+            textClassName="text-4xl sm:text-5xl md:text-6xl font-bold text-[#03fa97]"
+            containerClassName="w-full text-center"
+          >
+            Find Me
+          </ScrollFloat>
+
+          {/* Subcopy singkat (opsional) */}
+          <p className="mt-4 text-center text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">Terhubung lewat platform favoritmu , saya aktif berbagi karya, proses, dan insight.</p>
+
+          {/* Grid tombol sosial */}
+          <div className="mt-8 md:mt-10 flex flex-wrap justify-center gap-3 sm:gap-4">
+            <SocialButton href="https://www.instagram.com/fadilah_aprianto" label="Instagram">
+              <SiInstagram />
+            </SocialButton>
+            <SocialButton href="https://www.linkedin.com/in/fadilah-aprianto-6a651b322" label="LinkedIn">
+              <SiLinkedin />
+            </SocialButton>
+            <SocialButton href="https://github.com/PepsodenTBiawaK" label="GitHub">
+              <SiGithub />
+            </SocialButton>
+          </div>
+        </div>
+      </section>
+
       {/* Logo Loop */}
       <div style={{ height: "100px", position: "relative", overflow: "hidden" }}>
         <LogoLoop logos={techLogos} speed={120} direction="left" logoHeight={48} gap={40} pauseOnHover scaleOnHover fadeOut fadeOutColor="#000000" ariaLabel="Technology partners" />
