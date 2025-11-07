@@ -6,16 +6,16 @@ import { cover } from "three/src/extras/TextureUtils.js";
 
 export default function FocusCardsDemo() {
   const cards = [
-    {
-      title: "Undangan Pernikahan Digital",
-      src: "/assets/projects/Project1.svg",
-      cover: "/assets/projects/Project1/Cover1.svg",
-      description: "Aplikasi undangan pernikahan digital yang interaktif dan mudah digunakan, memungkinkan pasangan untuk berbagi momen spesial mereka dengan keluarga dan teman-teman secara online.",
-      highlights: ["Desain menarik", "Fitur RSVP untuk tamu", "Story", "Galeri Foto", "Peta lokasi acara"],
-      tags: ["Html", "CSS Vanilla", "JavaScript"],
-      links: [{ label: "Undangan Digital", href: "https://pepsodentbiawak.github.io/fadilah-destiany-wedding" }],
-      images: ["/assets/projects/Project1/Thumb1.svg", "/assets/projects/Project1/Thumb2.svg", "/assets/projects/Project1/Thumb3.svg"],
-    },
+    // {
+    //   title: "Undangan Pernikahan Digital",
+    //   src: "/assets/projects/Project1.svg",
+    //   cover: "/assets/projects/Project1/Cover1.svg",
+    //   description: "Aplikasi undangan pernikahan digital yang interaktif dan mudah digunakan, memungkinkan pasangan untuk berbagi momen spesial mereka dengan keluarga dan teman-teman secara online.",
+    //   highlights: ["Desain menarik", "Fitur RSVP untuk tamu", "Story", "Galeri Foto", "Peta lokasi acara"],
+    //   tags: ["Html", "CSS Vanilla", "JavaScript"],
+    //   links: [{ label: "Undangan Digital", href: "https://pepsodentbiawak.github.io/fadilah-destiany-wedding" }],
+    //   images: ["/assets/projects/Project1/Thumb1.svg", "/assets/projects/Project1/Thumb2.svg", "/assets/projects/Project1/Thumb3.svg"],
+    // },
     {
       title: "Aplikasi AbsenKuy",
       src: "/assets/projects/Project2.svg",
