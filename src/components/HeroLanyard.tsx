@@ -29,7 +29,15 @@ class SceneBoundary extends Component<
   }
 }
 
-export default function HeroLanyard() {
+export default function HeroLanyard({
+  imageSrc,
+  imageAlt,
+  enabled3D = true,
+}: {
+  imageSrc: string;
+  imageAlt: string;
+  enabled3D?: boolean;
+}) {
   const container = useRef<HTMLDivElement>(null);
   const [enabled, setEnabled] = useState(false);
   const [active, setActive] = useState(false);
@@ -38,6 +46,7 @@ export default function HeroLanyard() {
   const handleError = useCallback(() => setReady(false), []);
 
   useEffect(() => {
+    if (!enabled3D) return;
     const media = matchMedia(
       "(min-width: 768px) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
     );
@@ -81,7 +90,7 @@ export default function HeroLanyard() {
       if (idle !== undefined) cancelIdleCallback(idle);
       if (timer !== undefined) clearTimeout(timer);
     };
-  }, []);
+  }, [enabled3D]);
 
   return (
     <div
@@ -90,12 +99,12 @@ export default function HeroLanyard() {
       data-scene="lanyard"
     >
       <div
-        className={`absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 ${ready && active ? "opacity-0" : "opacity-100"}`}
+        className={`absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 ${enabled3D && ready && active ? "opacity-0" : "opacity-100"}`}
       >
         <div className="relative h-[min(36vh,300px)] aspect-[4/5] overflow-hidden rounded-t-full rounded-b-lg border border-[#b6d5ae]/20">
           <Image
-            src="/assets/images/profil.webp"
-            alt="Fadilah Aprianto"
+            src={imageSrc}
+            alt={imageAlt}
             fill
             sizes="(min-width: 768px) 340px, 70vw"
             preload
@@ -103,7 +112,7 @@ export default function HeroLanyard() {
           />
         </div>
       </div>
-      {enabled && (
+      {enabled3D && enabled && (
         <SceneBoundary onError={handleError}>
           <Lanyard
             position={[0, 0, 14]}

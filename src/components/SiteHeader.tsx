@@ -1,17 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { socialLinks } from "@/data/portfolio";
 import { ArrowUpRight, Close } from "./Icons";
 
-const navigation = [
-  { href: "#projects", label: "Karya" },
-  { href: "#about", label: "Tentang" },
-  { href: "#approach", label: "Pendekatan" },
-  { href: "#contact", label: "Kontak" },
-];
+type Props = {
+  brand: {
+    firstName: string;
+    lastName: string;
+    fullName: string;
+    monogram: string;
+  };
+  navigation: { href: string; label: string }[];
+  contact: { href: string; label: string };
+};
 
-export default function SiteHeader() {
+export default function SiteHeader({ brand, navigation, contact }: Props) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
   const header = useRef<HTMLElement>(null);
@@ -30,7 +33,7 @@ export default function SiteHeader() {
       if (section) observer.observe(section);
     });
     return () => observer.disconnect();
-  }, []);
+  }, [navigation]);
 
   useEffect(() => {
     const desktop = matchMedia("(min-width: 600px)");
@@ -66,16 +69,17 @@ export default function SiteHeader() {
         <a
           className="wordmark"
           href="#top"
-          aria-label="Fadilah Aprianto — kembali ke atas"
+          aria-label={`${brand.fullName} — kembali ke atas`}
           onClick={() => setOpen(false)}
         >
           <span className="wordmark-symbol">
-            fa<span>·</span>
+            {brand.monogram}
+            <span>·</span>
           </span>
           <span className="wordmark-caption">
-            FADILAH
+            {brand.firstName.toUpperCase()}
             <br />
-            APRIANTO
+            {brand.lastName.toUpperCase()}
           </span>
         </a>
         <nav
@@ -94,21 +98,21 @@ export default function SiteHeader() {
             </a>
           ))}
           <a
-            href={socialLinks.linkedin}
+            href={contact.href}
             target="_blank"
             rel="noopener noreferrer"
             className="mobile-contact"
           >
-            Mari bicara <ArrowUpRight />
+            {contact.label} <ArrowUpRight />
           </a>
         </nav>
         <a
           className="header-contact"
-          href={socialLinks.linkedin}
+          href={contact.href}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Mari bicara <ArrowUpRight />
+          {contact.label} <ArrowUpRight />
         </a>
         <button
           ref={toggle}

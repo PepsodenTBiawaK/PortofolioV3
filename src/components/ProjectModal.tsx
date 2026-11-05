@@ -84,14 +84,18 @@ export default function ProjectModal({
               <span className="eyebrow">RUANG LINGKUP</span>
               <p>{project.discipline}</p>
             </div>
-            <div>
-              <span className="eyebrow">PLATFORM</span>
-              <p>{project.platform}</p>
-            </div>
-            <div>
-              <span className="eyebrow">PERANGKAT</span>
-              <p>{project.tags.join(" · ")}</p>
-            </div>
+            {project.platform && (
+              <div>
+                <span className="eyebrow">PLATFORM</span>
+                <p>{project.platform}</p>
+              </div>
+            )}
+            {project.tags.length > 0 && (
+              <div>
+                <span className="eyebrow">PERANGKAT</span>
+                <p>{project.tags.join(" · ")}</p>
+              </div>
+            )}
           </div>
           <div className="case-gallery">
             <Image
@@ -144,23 +148,27 @@ export default function ProjectModal({
               </button>
             </div>
           </div>
-          <div className="case-context">
-            <p className="eyebrow">KONTEKS PROYEK</p>
-            <h3>{project.summary}</h3>
-            <p>{project.context}</p>
-          </div>
-          <div className="case-focus">
-            <p className="eyebrow">CATATAN ANTARMUKA</p>
-            <div>
-              {project.focus.map((item, itemIndex) => (
-                <article key={item.title}>
-                  <span>0{itemIndex + 1}</span>
-                  <h4>{item.title}</h4>
-                  <p>{item.description}</p>
-                </article>
-              ))}
+          {project.context && (
+            <div className="case-context">
+              <p className="eyebrow">KONTEKS PROYEK</p>
+              <h3>{project.summary}</h3>
+              <p>{project.context}</p>
             </div>
-          </div>
+          )}
+          {project.focus.length > 0 && (
+            <div className="case-focus">
+              <p className="eyebrow">CATATAN ANTARMUKA</p>
+              <div>
+                {project.focus.map((item, itemIndex) => (
+                  <article key={item.title}>
+                    <span>0{itemIndex + 1}</span>
+                    <h4>{item.title}</h4>
+                    <p>{item.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          )}
           <footer className="case-footer">
             <p>
               {project.category === "design"

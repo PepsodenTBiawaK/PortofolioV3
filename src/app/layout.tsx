@@ -3,11 +3,11 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { GeistSerifRegular } from "geist/font/serif/regular";
 import "./globals.css";
+import { pageContent } from "@/data/portfolio";
 
 export const metadata: Metadata = {
-  title: "Fadilah Aprianto — UI/UX Designer & Developer",
-  description:
-    "Pilihan karya UI/UX dan pengembangan web oleh Fadilah Aprianto. Merancang pengalaman digital yang jelas, berguna, dan dekat dengan penggunanya.",
+  title: pageContent.seo.title,
+  description: pageContent.seo.description,
 };
 
 export default function RootLayout({

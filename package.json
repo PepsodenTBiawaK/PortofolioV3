@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "check": "npm run check:assets && npm run typecheck && npm run build",
+    "check": "npm run check:content && npm run check:assets && npm run typecheck && npm run build",
     "test:e2e": "playwright test",
-    "check:assets": "node scripts/check-assets.mjs"
+    "check:assets": "node scripts/check-assets.mjs",
+    "check:content": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-content.mjs"
   },
   "dependencies": {
     "@react-three/drei": "10.7.9",

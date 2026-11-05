@@ -11,7 +11,11 @@ npm ci
 npm run dev
 ```
 
-Buka http://localhost:3000. Struktur halaman ada di `src/app/page.tsx`, data proyek/sertifikat/kontak di `src/data/portfolio.ts`, token dan layout di `src/app/globals.css`, serta aset di `public/assets`.
+Buka http://localhost:3000. Untuk memperbarui isi website, edit **[`src/content/portfolio.ts`](src/content/portfolio.ts)**. Panduan dan contoh salin-tempel tersedia di **[`src/content/README.md`](src/content/README.md)**.
+
+File konten mengatur profil, kontak, teks halaman, proyek, serta sertifikat. Proyek baru cukup diisi `id`, `name`, `category`, `summary`, dan `cover`; detail tambahan bersifat opsional. Urutan daftar menentukan urutan tampil, dan `visible: false` menyembunyikan proyek/sertifikat. Semuanya tetap statis, tanpa CMS atau database, dan diterbitkan melalui commit/push ke GitHub.
+
+Struktur halaman ada di `src/app/page.tsx`, penghubung konten ke komponen di `src/data/portfolio.ts`, token dan layout di `src/app/globals.css`, serta aset di `public/assets`.
 
 ## Arah desain dan konten
 
@@ -31,7 +35,7 @@ npm audit
 npm run test:e2e
 ```
 
-`check` memeriksa anggaran ukuran aset, TypeScript, dan build produksi. Pengujian browser memakai build produksi, jadi jalankan `check` terlebih dahulu. Di Windows pengujian memakai Google Chrome yang sudah terpasang. Di CI, Playwright memakai Chromium yang dipasang oleh workflow GitHub Actions.
+`check` memeriksa isian konten, ID proyek ganda, tautan, nama/path file (termasuk huruf besar/kecil), anggaran ukuran aset, TypeScript, dan build produksi. Gambar proyek selain 16:9 mendapat peringatan. Pemeriksaan konten saja dapat dijalankan dengan `npm run check:content`. Pengujian browser memakai build produksi, jadi jalankan `check` terlebih dahulu. Di Windows pengujian memakai Google Chrome yang sudah terpasang. Di CI, Playwright memakai Chromium yang dipasang oleh workflow GitHub Actions.
 
 Workflow `.github/workflows/check.yml` menjalankan build, audit, dan pengujian browser pada push/PR. Dependabot memeriksa pembaruan npm dan GitHub Actions setiap minggu; pembaruan perlu ditinjau dan digabungkan sebelum masuk produksi.
 
@@ -49,7 +53,7 @@ Workflow `.github/workflows/check.yml` menjalankan build, audit, dan pengujian b
 
 Simpan master desain di luar folder `public` agar tidak ikut deployment. Gunakan WebP; hindari ekspor SVG berisi foto/base64. Image budget maksimal 512 KiB per gambar, dengan total `public` maksimal 10 MiB.
 
-Untuk proyek baru, siapkan `preview`, `cover`, dan `images` dalam rasio **16:9**, misalnya **1600 × 900 px** atau **1920 × 1080 px**. Tambahkan satu objek proyek di `src/data/portfolio.ts`; semua frame mengikuti rasio yang sama tanpa perlu mengubah CSS per proyek. Gambar dengan rasio lain tetap ditampilkan utuh dan mendapat ruang kosong seperlunya.
+Untuk proyek baru, siapkan `cover` dalam rasio **16:9**, misalnya **1600 × 900 px** atau **1920 × 1080 px**. Tambahkan satu objek proyek di `src/content/portfolio.ts`. `preview` dan `images` boleh ditambahkan jika membutuhkan gambar kartu berbeda atau galeri tambahan; gunakan rasio yang sama. Semua frame mengikuti rasio 16:9 tanpa perlu mengubah CSS per proyek. Gambar dengan rasio lain tetap ditampilkan utuh dan mendapat ruang kosong seperlunya.
 
 Jika master berupa SVG dengan struktur folder `projects/`, `certificates/`, `tools/`, atau `images/profil.jpg`, konversi menggunakan:
 
@@ -57,7 +61,7 @@ Jika master berupa SVG dengan struktur folder `projects/`, `certificates/`, `too
 node scripts/optimize-assets.mjs path/to/original/assets
 ```
 
-Script membaca master dan menulis WebP ke `public/assets`, tanpa menghapus master. Referensi di komponen tetap perlu disesuaikan saat menambah gambar baru. Original aset yang diganti pada optimasi November 2026 masih tersedia di riwayat Git.
+Script membaca master dan menulis WebP ke `public/assets`, tanpa menghapus master. Referensi gambar di file konten perlu disesuaikan saat menambah gambar baru. Original aset yang diganti pada optimasi November 2026 masih tersedia di riwayat Git.
 
 ## Deployment Vercel
 
