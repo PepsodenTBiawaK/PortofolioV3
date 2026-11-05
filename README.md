@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+﻿# Portfolio Fadilah Aprianto
 
-## Getting Started
+Portofolio pribadi berbasis Next.js App Router, React, TypeScript, dan Tailwind CSS. Ditujukan untuk deployment Next.js standar di Vercel melalui GitHub; tidak memerlukan database, API eksternal, atau environment variable.
 
-First, run the development server:
+## Pengembangan
 
-```bash
+Gunakan Node.js **24.x** (lihat `.nvmrc` dan `engines`), lalu:
+
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka http://localhost:3000. Konten utama ada di `src/app/page.tsx`, data proyek di `src/components/FocusCardsDemo.tsx`, dan aset di `public/assets`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pemeriksaan sebelum push
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+npm run check
+npm audit
+npm run test:e2e
+```
 
-## Learn More
+`check` memeriksa anggaran ukuran aset, TypeScript, dan build produksi. Pengujian browser memakai build produksi, jadi jalankan `check` terlebih dahulu. Di Windows pengujian memakai Google Chrome yang sudah terpasang. Di CI, Playwright memakai Chromium yang dipasang oleh workflow GitHub Actions.
 
-To learn more about Next.js, take a look at the following resources:
+Workflow `.github/workflows/check.yml` menjalankan build, audit, dan pengujian browser pada push/PR. Dependabot memeriksa pembaruan npm dan GitHub Actions setiap minggu; pembaruan perlu ditinjau dan digabungkan sebelum masuk produksi.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Perilaku performa
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Halaman utama merupakan Server Component dan diprerender menjadi HTML statis.
+- Konten langsung terlihat tanpa splash screen yang menahan scroll.
+- Lanyard 3D dimuat terpisah setelah konten tampil, hanya pada perangkat dengan pointer presisi, lebar minimal 768px, tanpa reduced motion/data saver/koneksi 2G. Di perangkat lain ditampilkan foto profil. Kegagalan memuat 3D juga mempertahankan foto.
+- Render dan fisika lanyard berhenti saat hero keluar layar atau tab tidak aktif.
+- Latar hero, galeri tools, kursor glow, tombol, dan logo loop menggunakan CSS/DOM ringan.
+- Gambar memakai WebP dan `next/image`; gambar di bawah layar dimuat secara lazy, dan gambar detail proyek baru dimuat saat modal dibuka.
+- Modal mendukung Escape, panah kiri/kanan, pembatasan fokus keyboard, serta pengembalian fokus ke kartu asal.
 
-## Deploy on Vercel
+## Menambah gambar
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Simpan master desain di luar folder `public` agar tidak ikut deployment. Gunakan WebP; hindari ekspor SVG berisi foto/base64. Image budget maksimal 512 KiB per gambar, dengan total `public` maksimal 10 MiB.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Jika master berupa SVG dengan struktur folder `projects/`, `certificates/`, `tools/`, atau `images/profil.jpg`, konversi menggunakan:
+
+```sh
+node scripts/optimize-assets.mjs path/to/original/assets
+```
+
+Script membaca master dan menulis WebP ke `public/assets`, tanpa menghapus master. Referensi di komponen tetap perlu disesuaikan saat menambah gambar baru. Original aset yang diganti pada optimasi November 2026 masih tersedia di riwayat Git.
+
+## Deployment Vercel
+
+Hubungkan repository GitHub ke Vercel dengan preset **Next.js**, Node.js **24.x**, install command `npm ci`, dan build command `npm run build`. Biarkan output directory mengikuti default Next.js. Commit `package-lock.json`, aset WebP baru, perubahan kode, dan penghapusan aset lama bersama-sama.
+
+Perubahan lokal baru terbit setelah di-push ke branch deployment yang terhubung. Tidak diperlukan migrasi hosting atau `vercel.json` khusus.
+
+## Hasil optimasi 5 November 2026
+
+- 37 aset SVG proyek, sertifikat, dan tools: **302.004.674 byte → 1.606.646 byte** (berkurang **99,5%**). Foto profil juga dikonversi ke WebP.
+- Total seluruh aset di `public` setelah pembersihan: **2.576.204 byte**, sekitar **2,46 MiB**.
+- Next.js **16.4.5**, React/React DOM **19.3.1**, Tailwind CSS **4.3.4**, TypeScript **7.0.2**, dan dependency aktif lainnya diperbarui. Versi dipin dan dikunci dalam lockfile. Tipe Node mengikuti runtime 24.x.
+- Audit online awal: **8 paket bermasalah** (2 moderate, 4 high, 2 critical). Setelah pembaruan: **0 kerentanan yang dilaporkan npm audit** pada waktu pemeriksaan.
+- Lihat [rilis keamanan Next.js 16.4.5](https://github.com/vercel/next.js/releases/tag/v16.4.5) untuk advisori upstream.
+
+Persentase di atas mengukur ukuran file aset, bukan persentase percepatan halaman. Kecepatan di produksi tetap dipengaruhi perangkat, koneksi, dan cache Vercel; Core Web Vitals produksi belum diukur dari checkout lokal ini.

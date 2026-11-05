@@ -1,15 +1,23 @@
-import type { SpringOptions } from 'motion/react';
-import { useRef, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'motion/react';
+"use client";
+
+import type { SpringOptions } from "motion/react";
+import { useRef } from "react";
+import Image from "next/image";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useReducedMotion,
+} from "motion/react";
 
 interface TiltedCardProps {
-  imageSrc: React.ComponentProps<'img'>['src'];
+  imageSrc: string;
   altText?: string;
   captionText?: string;
-  containerHeight?: React.CSSProperties['height'];
-  containerWidth?: React.CSSProperties['width'];
-  imageHeight?: React.CSSProperties['height'];
-  imageWidth?: React.CSSProperties['width'];
+  containerHeight?: React.CSSProperties["height"];
+  containerWidth?: React.CSSProperties["width"];
+  imageHeight?: React.CSSProperties["height"];
+  imageWidth?: React.CSSProperties["width"];
   scaleOnHover?: number;
   rotateAmplitude?: number;
   showMobileWarning?: boolean;
@@ -21,23 +29,23 @@ interface TiltedCardProps {
 const springValues: SpringOptions = {
   damping: 30,
   stiffness: 100,
-  mass: 2
+  mass: 2,
 };
 
 export default function TiltedCard({
   imageSrc,
-  altText = 'Tilted card image',
-  captionText = '',
-  containerHeight = '300px',
-  containerWidth = '100%',
-  imageHeight = '300px',
-  imageWidth = '300px',
+  altText = "Tilted card image",
+  captionText = "",
+  containerHeight = "300px",
+  containerWidth = "100%",
+  imageHeight = "300px",
+  imageWidth = "300px",
   scaleOnHover = 1.1,
   rotateAmplitude = 14,
   showMobileWarning = true,
   showTooltip = true,
   overlayContent = null,
-  displayOverlayContent = false
+  displayOverlayContent = false,
 }: TiltedCardProps) {
   const ref = useRef<HTMLElement>(null);
   const x = useMotionValue(0);
@@ -49,13 +57,14 @@ export default function TiltedCard({
   const rotateFigcaption = useSpring(0, {
     stiffness: 350,
     damping: 30,
-    mass: 1
+    mass: 1,
   });
 
-  const [lastY, setLastY] = useState(0);
+  const lastY = useRef(0);
+  const reducedMotion = useReducedMotion();
 
   function handleMouse(e: React.MouseEvent<HTMLElement>) {
-    if (!ref.current) return;
+    if (!ref.current || reducedMotion) return;
 
     const rect = ref.current.getBoundingClientRect();
     const offsetX = e.clientX - rect.left - rect.width / 2;
@@ -70,12 +79,13 @@ export default function TiltedCard({
     x.set(e.clientX - rect.left);
     y.set(e.clientY - rect.top);
 
-    const velocityY = offsetY - lastY;
+    const velocityY = offsetY - lastY.current;
     rotateFigcaption.set(-velocityY * 0.6);
-    setLastY(offsetY);
+    lastY.current = offsetY;
   }
 
   function handleMouseEnter() {
+    if (reducedMotion) return;
     scale.set(scaleOnHover);
     opacity.set(1);
   }
@@ -94,7 +104,7 @@ export default function TiltedCard({
       className="relative w-full h-full [perspective:800px] flex flex-col items-center justify-center"
       style={{
         height: containerHeight,
-        width: containerWidth
+        width: containerWidth,
       }}
       onMouseMove={handleMouse}
       onMouseEnter={handleMouseEnter}
@@ -113,17 +123,16 @@ export default function TiltedCard({
           height: imageHeight,
           rotateX,
           rotateY,
-          scale
+          scale,
         }}
       >
-        <motion.img
+        <Image
           src={imageSrc}
           alt={altText}
-          className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
-          style={{
-            width: imageWidth,
-            height: imageHeight
-          }}
+          fill
+          sizes="(min-width: 1024px) 420px, (min-width: 640px) 50vw, 90vw"
+          loading="lazy"
+          className="object-cover rounded-[15px]"
         />
 
         {displayOverlayContent && overlayContent && (
@@ -140,7 +149,7 @@ export default function TiltedCard({
             x,
             y,
             opacity,
-            rotate: rotateFigcaption
+            rotate: rotateFigcaption,
           }}
         >
           {captionText}

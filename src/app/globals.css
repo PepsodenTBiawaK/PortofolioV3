@@ -43,6 +43,7 @@
 }
 
 :root {
+  color-scheme: dark;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -75,6 +76,44 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1.5rem;
+}
+
+.hero-background {
+  background:
+    radial-gradient(ellipse at 15% 35%, #051e1f 0%, transparent 65%),
+    linear-gradient(135deg, #06090e, #0a2325 45%, #06090e 80%);
+}
+
+.logo-loop-track {
+  animation: logo-loop var(--loop-duration) linear infinite
+    var(--loop-direction);
+}
+.logo-loop-pause:hover .logo-loop-track,
+.logo-loop:focus-within .logo-loop-track {
+  animation-play-state: paused;
+}
+@keyframes logo-loop {
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .dark {
@@ -122,9 +161,9 @@
 
 /* sembunyikan indikator scrollbar (tetap bisa di-scroll) */
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE & Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
 }
 .no-scrollbar::-webkit-scrollbar {
-  display: none;             /* Chrome/Safari/Opera */
+  display: none; /* Chrome/Safari/Opera */
 }

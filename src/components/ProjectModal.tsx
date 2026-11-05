@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
+import Image from "next/image";
 
 export type ProjectDetail = {
   title: string;
-  cover: string;                 // gambar utama
+  cover: string; // gambar utama
   description?: string;
   highlights?: string[];
   tags?: string[];
   links?: { label: string; href: string }[];
-  images?: string[];             // OPSIONAL: galeri tambahan
+  images?: string[]; // OPSIONAL: galeri tambahan
 };
 
 type Props = {
@@ -21,11 +22,51 @@ type Props = {
 export default function ProjectModal({ open, onClose, project }: Props) {
   // 1) Hooks SELALU dipanggil di awal (jangan dikondisikan)
   const [idx, setIdx] = useState(0);
+  const panel = useRef<HTMLDivElement>(null);
+  const titleId = useId();
 
   // Bangun list gambar aman walau project null
   const imgs = project ? [project.cover, ...(project.images ?? [])] : [];
   const total = imgs.length;
   const hasCarousel = total > 1;
+
+  useEffect(() => {
+    if (!open) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const getButtons = () =>
+      Array.from(
+        panel.current?.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), a[href], [tabindex="0"]',
+        ) ?? [],
+      );
+    getButtons()[0]?.focus();
+    const trapFocus = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+      const buttons = getButtons();
+      const first = buttons[0];
+      const last = buttons[buttons.length - 1];
+      if (
+        event.shiftKey &&
+        (document.activeElement === first ||
+          !panel.current?.contains(document.activeElement))
+      ) {
+        event.preventDefault();
+        last?.focus();
+      } else if (
+        !event.shiftKey &&
+        (document.activeElement === last ||
+          !panel.current?.contains(document.activeElement))
+      ) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+    window.addEventListener("keydown", trapFocus);
+    return () => {
+      window.removeEventListener("keydown", trapFocus);
+      previousFocus?.focus();
+    };
+  }, [open]);
 
   // Kunci body scroll saat open
   useEffect(() => {
@@ -66,19 +107,30 @@ export default function ProjectModal({ open, onClose, project }: Props) {
   const next = () => setIdx((i) => (i + 1) % total);
 
   return (
-    <div role="dialog" aria-modal="true" className="fixed inset-0 z-[60]">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={titleId}
+      className="fixed inset-0 z-[60]"
+    >
       {/* Backdrop */}
       <button
         aria-label="Close backdrop"
+        tabIndex={-1}
         onClick={onClose}
         className="absolute inset-0 bg-black/70 backdrop-blur-sm"
       />
 
       {/* Panel (scroll konten, scrollbar disembunyikan) */}
-      <div className="relative z-[61] mx-auto my-6 w-[min(92vw,960px)] max-h-[90vh] overflow-y-auto rounded-2xl border border-white/10 bg-[#0B0F14] p-4 sm:p-6 no-scrollbar">
+      <div
+        ref={panel}
+        className="relative z-[61] mx-auto my-6 w-[min(92vw,960px)] max-h-[90vh] overflow-y-auto rounded-2xl border border-white/10 bg-[#0B0F14] p-4 sm:p-6 no-scrollbar"
+      >
         {/* Header */}
-        <div className="flex items-start gap-3">
-          <h3 className="text-xl sm:text-2xl font-bold text-white">{project.title}</h3>
+        <div className="sticky -top-4 sm:-top-6 z-10 flex items-start gap-3 bg-[#0B0F14] py-3">
+          <h3 id={titleId} className="text-xl sm:text-2xl font-bold text-white">
+            {project.title}
+          </h3>
           <button
             className="ml-auto rounded-full p-2 hover:bg-white/10 transition text-white/80"
             onClick={onClose}
@@ -91,11 +143,14 @@ export default function ProjectModal({ open, onClose, project }: Props) {
         {/* Media / Carousel */}
         <div className="mt-4 relative w-full overflow-hidden rounded-lg">
           {total > 0 && (
-            <img
+            <Image
               src={imgs[idx]}
               alt={`${project.title} - image ${idx + 1}`}
               className="w-full h-auto object-cover"
               loading="eager"
+              width={1600}
+              height={900}
+              sizes="(min-width: 1024px) 912px, 90vw"
             />
           )}
 
@@ -127,11 +182,20 @@ export default function ProjectModal({ open, onClose, project }: Props) {
                 key={`${project.title}-thumb-${i}`}
                 onClick={() => setIdx(i)}
                 className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-md border transition ${
-                  i === idx ? "border-[#03fa97]" : "border-white/10 hover:border-white/30"
+                  i === idx
+                    ? "border-[#03fa97]"
+                    : "border-white/10 hover:border-white/30"
                 }`}
                 aria-label={`Go to image ${i + 1}`}
               >
-                <img src={src} alt={`thumb ${i + 1}`} className="h-full w-full object-cover" />
+                <Image
+                  src={src}
+                  alt={`thumb ${i + 1}`}
+                  fill
+                  sizes="96px"
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
               </button>
             ))}
           </div>
@@ -140,7 +204,9 @@ export default function ProjectModal({ open, onClose, project }: Props) {
         {/* Body */}
         <div className="mt-4 space-y-4">
           {!!project.description && (
-            <p className="text-gray-300 leading-relaxed">{project.description}</p>
+            <p className="text-gray-300 leading-relaxed">
+              {project.description}
+            </p>
           )}
 
           {!!project.highlights?.length && (
