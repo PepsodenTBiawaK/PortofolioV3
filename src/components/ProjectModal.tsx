@@ -1,252 +1,189 @@
 "use client";
 
-import React, { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
+import type { Project } from "@/types/project";
+import { ArrowRight, ArrowUpRight, Close } from "./Icons";
 
-export type ProjectDetail = {
-  title: string;
-  cover: string; // gambar utama
-  description?: string;
-  highlights?: string[];
-  tags?: string[];
-  links?: { label: string; href: string }[];
-  images?: string[]; // OPSIONAL: galeri tambahan
-};
-
-type Props = {
-  open: boolean;
+export default function ProjectModal({
+  project,
+  onClose,
+}: {
+  project: Project;
   onClose: () => void;
-  project?: ProjectDetail | null;
-};
-
-export default function ProjectModal({ open, onClose, project }: Props) {
-  // 1) Hooks SELALU dipanggil di awal (jangan dikondisikan)
-  const [idx, setIdx] = useState(0);
-  const panel = useRef<HTMLDivElement>(null);
+}) {
+  const dialog = useRef<HTMLDialogElement>(null);
+  const [index, setIndex] = useState(0);
   const titleId = useId();
-
-  // Bangun list gambar aman walau project null
-  const imgs = project ? [project.cover, ...(project.images ?? [])] : [];
-  const total = imgs.length;
-  const hasCarousel = total > 1;
+  const images = [project.cover, ...project.images];
 
   useEffect(() => {
-    if (!open) return;
-    const previousFocus = document.activeElement as HTMLElement | null;
-    const getButtons = () =>
-      Array.from(
-        panel.current?.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), a[href], [tabindex="0"]',
-        ) ?? [],
-      );
-    getButtons()[0]?.focus();
-    const trapFocus = (event: KeyboardEvent) => {
-      if (event.key !== "Tab") return;
-      const buttons = getButtons();
-      const first = buttons[0];
-      const last = buttons[buttons.length - 1];
-      if (
-        event.shiftKey &&
-        (document.activeElement === first ||
-          !panel.current?.contains(document.activeElement))
-      ) {
+    const element = dialog.current;
+    if (!element) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    element.showModal();
+    return () => {
+      element.close();
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
+  useEffect(() => {
+    const key = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
         event.preventDefault();
-        last?.focus();
-      } else if (
-        !event.shiftKey &&
-        (document.activeElement === last ||
-          !panel.current?.contains(document.activeElement))
-      ) {
+        setIndex((value) => (value - 1 + images.length) % images.length);
+      }
+      if (event.key === "ArrowRight") {
         event.preventDefault();
-        first?.focus();
+        setIndex((value) => (value + 1) % images.length);
       }
     };
-    window.addEventListener("keydown", trapFocus);
-    return () => {
-      window.removeEventListener("keydown", trapFocus);
-      previousFocus?.focus();
-    };
-  }, [open]);
+    window.addEventListener("keydown", key);
+    return () => window.removeEventListener("keydown", key);
+  }, [images.length]);
 
-  // Kunci body scroll saat open
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [open]);
-
-  // Reset ke slide 0 saat project berubah
-  useEffect(() => {
-    setIdx(0);
-  }, [project]);
-
-  // Jaga index tetap valid kalau total berubah
-  useEffect(() => {
-    if (idx >= total) setIdx(0);
-  }, [total, idx]);
-
-  // Keyboard: Esc tutup, panah kiri/kanan untuk navigasi
-  useEffect(() => {
-    if (!open || total <= 0) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") setIdx((i) => (i - 1 + total) % total);
-      if (e.key === "ArrowRight") setIdx((i) => (i + 1) % total);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, total, onClose]);
-
-  // 2) Setelah SEMUA hooks, boleh return null
-  if (!open || !project) return null;
-
-  const prev = () => setIdx((i) => (i - 1 + total) % total);
-  const next = () => setIdx((i) => (i + 1) % total);
-
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
+  if (typeof document === "undefined") return null;
+  return createPortal(
+    <dialog
+      ref={dialog}
+      className="case-modal"
       aria-labelledby={titleId}
-      className="fixed inset-0 z-[60]"
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
     >
-      {/* Backdrop */}
-      <button
-        aria-label="Close backdrop"
-        tabIndex={-1}
-        onClick={onClose}
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-      />
-
-      {/* Panel (scroll konten, scrollbar disembunyikan) */}
-      <div
-        ref={panel}
-        className="relative z-[61] mx-auto my-6 w-[min(92vw,960px)] max-h-[90vh] overflow-y-auto rounded-2xl border border-white/10 bg-[#0B0F14] p-4 sm:p-6 no-scrollbar"
-      >
-        {/* Header */}
-        <div className="sticky -top-4 sm:-top-6 z-10 flex items-start gap-3 bg-[#0B0F14] py-3">
-          <h3 id={titleId} className="text-xl sm:text-2xl font-bold text-white">
-            {project.title}
-          </h3>
+      <div className="case-panel">
+        <header className="case-header">
+          <div>
+            <span className="eyebrow">
+              PROJECT NOTES / {project.discipline}
+            </span>
+            <h2 id={titleId}>{project.title}</h2>
+          </div>
           <button
-            className="ml-auto rounded-full p-2 hover:bg-white/10 transition text-white/80"
+            type="button"
+            className="icon-button"
             onClick={onClose}
-            aria-label="Close"
+            aria-label="Tutup detail proyek"
+            autoFocus
           >
-            ✕
+            <Close />
           </button>
-        </div>
-
-        {/* Media / Carousel */}
-        <div className="mt-4 relative w-full overflow-hidden rounded-lg">
-          {total > 0 && (
+        </header>
+        <div className="case-content">
+          <p className="case-summary">{project.description}</p>
+          <div className="case-facts">
+            <div>
+              <span className="eyebrow">RUANG LINGKUP</span>
+              <p>{project.discipline}</p>
+            </div>
+            <div>
+              <span className="eyebrow">PLATFORM</span>
+              <p>{project.platform}</p>
+            </div>
+            <div>
+              <span className="eyebrow">PERANGKAT</span>
+              <p>{project.tags.join(" · ")}</p>
+            </div>
+          </div>
+          <div className="case-gallery">
             <Image
-              src={imgs[idx]}
-              alt={`${project.title} - image ${idx + 1}`}
-              className="w-full h-auto object-cover"
-              loading="eager"
+              src={images[index]}
+              alt={`${project.title} - image ${index + 1}`}
               width={1600}
               height={900}
-              sizes="(min-width: 1024px) 912px, 90vw"
+              sizes="(min-width: 1100px) 1032px, 92vw"
+              loading="eager"
+              className="case-image"
             />
-          )}
-
-          {hasCarousel && (
-            <>
-              <button
-                onClick={prev}
-                className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 hover:bg-black/70 text-white p-2"
-                aria-label="Previous"
-              >
-                ‹
-              </button>
-              <button
-                onClick={next}
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 hover:bg-black/70 text-white p-2"
-                aria-label="Next"
-              >
-                ›
-              </button>
-            </>
-          )}
-        </div>
-
-        {/* Thumbnails */}
-        {hasCarousel && (
-          <div className="mt-3 flex gap-2 overflow-x-auto no-scrollbar scroll-smooth">
-            {imgs.map((src, i) => (
-              <button
-                key={`${project.title}-thumb-${i}`}
-                onClick={() => setIdx(i)}
-                className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-md border transition ${
-                  i === idx
-                    ? "border-[#03fa97]"
-                    : "border-white/10 hover:border-white/30"
-                }`}
-                aria-label={`Go to image ${i + 1}`}
-              >
-                <Image
-                  src={src}
-                  alt={`thumb ${i + 1}`}
-                  fill
-                  sizes="96px"
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                />
-              </button>
-            ))}
           </div>
-        )}
-
-        {/* Body */}
-        <div className="mt-4 space-y-4">
-          {!!project.description && (
-            <p className="text-gray-300 leading-relaxed">
-              {project.description}
+          <div className="gallery-controls">
+            <div className="gallery-thumbnails">
+              {images.map((image, itemIndex) => (
+                <button
+                  key={image}
+                  type="button"
+                  aria-label={`Lihat gambar ${itemIndex + 1}`}
+                  aria-pressed={index === itemIndex}
+                  onClick={() => setIndex(itemIndex)}
+                >
+                  <Image src={image} alt="" fill sizes="80px" />
+                </button>
+              ))}
+            </div>
+            <div className="gallery-pagination">
+              <button
+                type="button"
+                className="icon-button"
+                aria-label="Gambar sebelumnya"
+                onClick={() =>
+                  setIndex(
+                    (value) => (value - 1 + images.length) % images.length,
+                  )
+                }
+              >
+                <ArrowRight className="arrow-back" />
+              </button>
+              <span aria-live="polite">
+                {String(index + 1).padStart(2, "0")} /{" "}
+                {String(images.length).padStart(2, "0")}
+              </span>
+              <button
+                type="button"
+                className="icon-button"
+                aria-label="Gambar berikutnya"
+                onClick={() => setIndex((value) => (value + 1) % images.length)}
+              >
+                <ArrowRight />
+              </button>
+            </div>
+          </div>
+          <div className="case-context">
+            <p className="eyebrow">KONTEKS PROYEK</p>
+            <h3>{project.summary}</h3>
+            <p>{project.context}</p>
+          </div>
+          <div className="case-focus">
+            <p className="eyebrow">CATATAN ANTARMUKA</p>
+            <div>
+              {project.focus.map((item, itemIndex) => (
+                <article key={item.title}>
+                  <span>0{itemIndex + 1}</span>
+                  <h4>{item.title}</h4>
+                  <p>{item.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+          <footer className="case-footer">
+            <p>
+              {project.category === "design"
+                ? "Dokumentasi ini menampilkan eksplorasi visual dan ruang lingkup antarmuka."
+                : "Eksplorasi desain yang terhubung dengan pengembangan web dan mobile."}
             </p>
-          )}
-
-          {!!project.highlights?.length && (
-            <ul className="list-disc pl-5 text-gray-300 space-y-1">
-              {project.highlights.map((h, i) => (
-                <li key={`${project.title}-hl-${i}`}>{h}</li>
-              ))}
-            </ul>
-          )}
-
-          {!!project.tags?.length && (
-            <div className="flex flex-wrap gap-2 pt-1">
-              {project.tags.map((t, i) => (
-                <span
-                  key={`${project.title}-tag-${i}`}
-                  className="px-3 py-1.5 rounded-full text-xs bg-white/5 border border-white/10 text-gray-200"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {!!project.links?.length && (
-            <div className="flex flex-wrap gap-3 pt-2">
-              {project.links.map((l, i) => (
-                <a
-                  key={`${project.title}-link-${i}`}
-                  href={l.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex px-4 py-2 rounded-full border border-[#03fa97]/40 bg-white/5 hover:bg-[#03fa97]/10 text-sm text-white transition"
-                >
-                  {l.label} →
-                </a>
-              ))}
-            </div>
-          )}
+            {project.links?.map((link) => (
+              <a
+                className="button button-primary"
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label}
+                <ArrowUpRight />
+              </a>
+            ))}
+          </footer>
         </div>
       </div>
-    </div>
+    </dialog>,
+    document.body,
   );
 }

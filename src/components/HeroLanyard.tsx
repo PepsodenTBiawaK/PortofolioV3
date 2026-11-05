@@ -84,18 +84,22 @@ export default function HeroLanyard() {
   }, []);
 
   return (
-    <div ref={container} className="relative w-full h-full">
+    <div
+      ref={container}
+      className="relative w-full h-full"
+      data-scene="lanyard"
+    >
       <div
         className={`absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 ${ready && active ? "opacity-0" : "opacity-100"}`}
       >
-        <div className="relative h-[min(36vh,340px)] aspect-[4/5] overflow-hidden rounded-3xl border border-[#03fa97]/30 shadow-[0_0_60px_#03fa9715]">
+        <div className="relative h-[min(36vh,300px)] aspect-[4/5] overflow-hidden rounded-t-full rounded-b-lg border border-[#b6d5ae]/20">
           <Image
             src="/assets/images/profil.webp"
             alt="Fadilah Aprianto"
             fill
             sizes="(min-width: 768px) 340px, 70vw"
             preload
-            className="object-cover"
+            className="object-cover saturate-50"
           />
         </div>
       </div>

@@ -11,7 +11,17 @@ npm ci
 npm run dev
 ```
 
-Buka http://localhost:3000. Konten utama ada di `src/app/page.tsx`, data proyek di `src/components/FocusCardsDemo.tsx`, dan aset di `public/assets`.
+Buka http://localhost:3000. Struktur halaman ada di `src/app/page.tsx`, data proyek/sertifikat/kontak di `src/data/portfolio.ts`, token dan layout di `src/app/globals.css`, serta aset di `public/assets`.
+
+## Arah desain dan konten
+
+Tampilan menggunakan charcoal, putih hangat, dan aksen sage. Geist Sans dipasangkan dengan Geist Serif; seluruh font disajikan lokal. Karya ditempatkan langsung setelah hero, diikuti profil/pengalaman, pendekatan desain, pembelajaran, dan kontak.
+
+- Kartu proyek memiliki judul dan konteks di luar gambar, dengan gambar utuh yang tidak terpotong pada mobile.
+- Filter membagi enam karya menjadi UI/UX Design dan Development.
+- Detail proyek memuat ruang lingkup, galeri, konteks, serta catatan antarmuka. Konten tidak menambahkan metrik, riset, atau hasil pengujian yang belum diberikan.
+- Navigasi mobile mendukung Escape dan menutup setelah tautan dipilih. Detail proyek memakai dialog native dengan fokus yang dibatasi browser.
+- LinkedIn menjadi kontak utama sesuai pilihan pemilik. Tombol email/CV tidak ditampilkan karena informasi tersebut belum tersedia.
 
 ## Pemeriksaan sebelum push
 
@@ -29,9 +39,9 @@ Workflow `.github/workflows/check.yml` menjalankan build, audit, dan pengujian b
 
 - Halaman utama merupakan Server Component dan diprerender menjadi HTML statis.
 - Konten langsung terlihat tanpa splash screen yang menahan scroll.
-- Lanyard 3D dimuat terpisah setelah konten tampil, hanya pada perangkat dengan pointer presisi, lebar minimal 768px, tanpa reduced motion/data saver/koneksi 2G. Di perangkat lain ditampilkan foto profil. Kegagalan memuat 3D juga mempertahankan foto.
+- Lanyard 3D dimuat terpisah setelah konten tampil, hanya ketika area visual desktop terlihat, pointer presisi tersedia, serta reduced motion/data saver/koneksi 2G tidak aktif. Layout di bawah 900px menggunakan foto kecil di samping nama. Kegagalan memuat 3D juga mempertahankan foto.
 - Render dan fisika lanyard berhenti saat hero keluar layar atau tab tidak aktif.
-- Latar hero, galeri tools, kursor glow, tombol, dan logo loop menggunakan CSS/DOM ringan.
+- Tipografi dan micro-interaction menggunakan CSS. Library GSAP dan Motion serta komponen dekoratif lama sudah dihapus dari dependency aktif.
 - Gambar memakai WebP dan `next/image`; gambar di bawah layar dimuat secara lazy, dan gambar detail proyek baru dimuat saat modal dibuka.
 - Modal mendukung Escape, panah kiri/kanan, pembatasan fokus keyboard, serta pengembalian fokus ke kartu asal.
 
