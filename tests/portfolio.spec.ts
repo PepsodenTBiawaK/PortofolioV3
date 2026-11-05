@@ -146,12 +146,15 @@ test("mobile navigation, contact destination and responsive layouts remain usabl
   );
   for (const width of [320, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
-    expect(
-      await page.evaluate(
-        () => document.documentElement.scrollWidth <= innerWidth,
-      ),
-      `overflow at ${width}px`,
-    ).toBe(true);
+    await expect
+      .poll(
+        () =>
+          page.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth,
+          ),
+        { message: `overflow at ${width}px` },
+      )
+      .toBe(true);
   }
 });
 

@@ -14,6 +14,7 @@
   --surface: #191d18;
   --muted: #a7ada1;
   --accent: #b6d5ae;
+  --project-image-ratio: 16 / 9;
   --line: #e5e8d51c;
   --font-editorial: var(--font-geist-serif-regular), Georgia, serif;
 }
@@ -487,7 +488,7 @@ em {
 }
 .project-media {
   position: relative;
-  aspect-ratio: 16/10;
+  aspect-ratio: var(--project-image-ratio);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -498,12 +499,12 @@ em {
 }
 .project-image {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: contain;
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: filter 0.3s;
 }
 .project-open:hover .project-image {
-  transform: scale(1.025);
+  filter: brightness(1.04);
 }
 .project-media-action {
   position: absolute;
@@ -599,6 +600,7 @@ em {
 .project-featured .project-open {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
+  align-items: center;
   background: #1b2019;
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -607,7 +609,6 @@ em {
 .project-featured .project-media {
   border: none;
   border-radius: 0;
-  aspect-ratio: 16/11;
   background: #d9ded2;
 }
 .project-featured .project-info {
@@ -1050,6 +1051,8 @@ em {
   margin-top: 7px;
 }
 .case-gallery {
+  position: relative;
+  aspect-ratio: var(--project-image-ratio);
   border-radius: 7px;
   overflow: hidden;
   background: #0d110d;
@@ -1057,7 +1060,8 @@ em {
 .case-image {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
 }
 .gallery-controls {
   display: flex;
@@ -1076,7 +1080,7 @@ em {
 .gallery-thumbnails button {
   position: relative;
   width: 80px;
-  height: 48px;
+  aspect-ratio: var(--project-image-ratio);
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid #d4e1c62b;
@@ -1091,7 +1095,7 @@ em {
   outline-offset: 2px;
 }
 .gallery-thumbnails img {
-  object-fit: cover;
+  object-fit: contain;
 }
 .gallery-pagination {
   display: flex;
@@ -1315,9 +1319,6 @@ em {
   }
   .project-featured .project-open {
     grid-template-columns: 1fr 1fr;
-  }
-  .project-featured .project-media {
-    aspect-ratio: auto;
   }
   .project-featured .project-info {
     padding: 23px;
@@ -1616,7 +1617,6 @@ em {
   }
   .project-media,
   .project-featured .project-media {
-    aspect-ratio: 16/10;
     border: 1px solid var(--line);
     border-radius: 7px;
   }
@@ -1896,8 +1896,7 @@ em {
     gap: 7px;
   }
   .gallery-thumbnails button {
-    width: 65px;
-    height: 44px;
+    width: 80px;
   }
   .gallery-pagination {
     justify-content: flex-end;

@@ -67,8 +67,7 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
                 <Image
                   src={project.preview}
                   alt={`Pratinjau ${project.name}`}
-                  width={1600}
-                  height={900}
+                  fill
                   sizes={
                     index === 0
                       ? "(min-width: 900px) 750px, 92vw"

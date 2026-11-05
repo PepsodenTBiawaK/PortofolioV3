@@ -17,7 +17,7 @@ Buka http://localhost:3000. Struktur halaman ada di `src/app/page.tsx`, data pro
 
 Tampilan menggunakan charcoal, putih hangat, dan aksen sage. Geist Sans dipasangkan dengan Geist Serif; seluruh font disajikan lokal. Karya ditempatkan langsung setelah hero, diikuti profil/pengalaman, pendekatan desain, pembelajaran, dan kontak.
 
-- Kartu proyek memiliki judul dan konteks di luar gambar, dengan gambar utuh yang tidak terpotong pada mobile.
+- Frame gambar kartu proyek, kartu unggulan, galeri detail, dan thumbnail memakai rasio 16:9 yang sama. Gambar ditampilkan utuh dengan `object-fit: contain`, termasuk saat hover. Rasio dikendalikan oleh satu token `--project-image-ratio` di `src/app/globals.css`.
 - Filter membagi enam karya menjadi UI/UX Design dan Development.
 - Detail proyek memuat ruang lingkup, galeri, konteks, serta catatan antarmuka. Konten tidak menambahkan metrik, riset, atau hasil pengujian yang belum diberikan.
 - Navigasi mobile mendukung Escape dan menutup setelah tautan dipilih. Detail proyek memakai dialog native dengan fokus yang dibatasi browser.
@@ -48,6 +48,8 @@ Workflow `.github/workflows/check.yml` menjalankan build, audit, dan pengujian b
 ## Menambah gambar
 
 Simpan master desain di luar folder `public` agar tidak ikut deployment. Gunakan WebP; hindari ekspor SVG berisi foto/base64. Image budget maksimal 512 KiB per gambar, dengan total `public` maksimal 10 MiB.
+
+Untuk proyek baru, siapkan `preview`, `cover`, dan `images` dalam rasio **16:9**, misalnya **1600 × 900 px** atau **1920 × 1080 px**. Tambahkan satu objek proyek di `src/data/portfolio.ts`; semua frame mengikuti rasio yang sama tanpa perlu mengubah CSS per proyek. Gambar dengan rasio lain tetap ditampilkan utuh dan mendapat ruang kosong seperlunya.
 
 Jika master berupa SVG dengan struktur folder `projects/`, `certificates/`, `tools/`, atau `images/profil.jpg`, konversi menggunakan:
 

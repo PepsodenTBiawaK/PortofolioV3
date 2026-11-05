@@ -97,8 +97,7 @@ export default function ProjectModal({
             <Image
               src={images[index]}
               alt={`${project.title} - image ${index + 1}`}
-              width={1600}
-              height={900}
+              fill
               sizes="(min-width: 1100px) 1032px, 92vw"
               loading="eager"
               className="case-image"
