@@ -92,7 +92,7 @@ export default function ProjectModal({
             )}
             {project.tags.length > 0 && (
               <div>
-                <span className="eyebrow">PERANGKAT</span>
+                <span className="eyebrow">TOOLS</span>
                 <p>{project.tags.join(" · ")}</p>
               </div>
             )}

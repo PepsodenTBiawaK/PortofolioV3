@@ -141,6 +141,66 @@ export const pageContent = {
 // ============================================================================
 export const projects: ProjectContent[] = [
   {
+  id: "bozzbill",
+  title: "Web App BozzBill",
+  name: "BozzBill",
+  category: "development",
+  discipline: "Web Development",
+  platform: "Aplikasi web · Komunitas billiard",
+  summary: "Membantu komunitas Bozz Billiard memantau performa, latihan, dan keanggotaan.",
+  description: "Pengembangan aplikasi web untuk komunitas Bozz Billiard Tebet. BozzBill membantu para player melihat performa mereka saat bermain, mencatat aktivitas latihan melalui jurnal drilling, dan mendukung pengelolaan keanggotaan komunitas.",
+  context: "Aktivitas bermain dan latihan komunitas dapat menghasilkan perkembangan yang diamati jika sistem pencatatannya belum terorganisir. BozzBill menyediakan satu platform untuk melihat performa player, mendokumentasikan latihan, dan mengelola informasi keanggotaan.",
+  focus: [
+    {
+      title: "Performa player",
+      description: "Menyajikan catatan performa agar player dapat meninjau perkembangan mereka dari sesi bermain di komunitas.",
+    },
+    {
+      title: "Jurnal drilling",
+      description: "Mendukung pencatatan latihan drilling sehingga player dapat mendokumentasikan latihan dan meninjau progresnya.",
+    },
+    {
+      title: "Manajemen keanggotaan",
+      description: "Membantu pengelolaan informasi dan status keanggotaan para player dalam komunitas.",
+    },
+  ],
+  cover: "/assets/projects/Project8/Cover8.webp",
+  preview: "/assets/projects/Project8/Cover8.webp",
+  images: ["/assets/projects/Project8/Cover8.webp"],
+  tags: ["PHP", "Laravel 13", "Blade", "Tailwind CSS 4", "Vite", "Pest", "MySQL"],
+  links: [{ label: "Buka aplikasi", href: "https://bozzbill.my.id" }],
+},
+  {
+  id: "o5hub",
+  title: "Web Platform O5Hub",
+  name: "O5Hub",
+  category: "development",
+  discipline: "Web Development",
+  platform: "Platform web",
+  summary: "Menghadirkan akses informasi dan layanan dalam satu platform web.",
+  description: "Pengembangan platform web O5Hub dengan struktur halaman yang membantu pengguna menemukan informasi dan mengakses layanan secara terorganisir.",
+  context: "Informasi dan layanan yang tersebar dapat menyulitkan pengguna menemukan hal yang dibutuhkan. O5Hub menyatukannya dalam pengalaman web yang lebih terarah dan mudah dijelajahi.",
+  focus: [
+    {
+      title: "Struktur halaman",
+      description: "Konten dan navigasi disusun agar pengguna dapat memahami susunan platform dan menemukan informasi dengan mudah.",
+    },
+    {
+      title: "Pengalaman responsif",
+      description: "Tampilan dirancang agar tetap nyaman digunakan pada berbagai ukuran layar.",
+    },
+    {
+      title: "Pengembangan antarmuka",
+      description: "Halaman web dibangun dengan pola antarmuka yang konsisten dan mendukung kebutuhan platform.",
+    },
+  ],
+  cover: "/assets/projects/Project7/Cover7.webp",
+  preview: "/assets/projects/Project7/Cover7.webp",
+  images: ["/assets/projects/Project7/Cover7.webp"],
+  tags: ["PHP", "Laravel 13", "Blade", "Tailwind CSS 4", "Vite", "Pest", "MySQL"],
+  links: [{ label: "Buka aplikasi", href: "https://o5hub.my.id" }],
+},
+{
     id: "nusafin",
     title: "Web App Nusafin",
     name: "Nusafin",
