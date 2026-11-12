@@ -52,8 +52,7 @@ export const socialLinks = {
 export const pageContent = {
   seo: {
     title: "Fadilah Aprianto — UI/UX Designer & Developer",
-    description:
-      "Pilihan karya UI/UX dan pengembangan web oleh Fadilah Aprianto. Merancang pengalaman digital yang jelas, berguna, dan dekat dengan penggunanya.",
+    description: "Pilihan karya UI/UX dan pengembangan web oleh Fadilah Aprianto. Merancang pengalaman digital yang jelas, berguna, dan dekat dengan penggunanya.",
   },
   navigation: [
     { href: "#projects", label: "Karya" },
@@ -63,8 +62,7 @@ export const pageContent = {
   ],
   headerContactLabel: "Mari bicara",
   hero: {
-    description:
-      "Merancang pengalaman digital yang terasa jelas, berguna, dan dekat dengan penggunanya.",
+    description: "Merancang pengalaman digital yang terasa jelas, berguna, dan dekat dengan penggunanya.",
     primaryButton: "Jelajahi karya",
     secondaryButton: "Sedikit tentang saya",
     footnote: ["Desain dengan empati.", "Dikembangkan dengan rasa ingin tahu."],
@@ -79,8 +77,7 @@ export const pageContent = {
       secondLine: "menjadi",
       accent: "pengalaman.",
     },
-    intro:
-      "Pilihan eksplorasi antarmuka dan pengembangan web. Setiap proyek membawa konteks dan tantangannya sendiri.",
+    intro: "Pilihan eksplorasi antarmuka dan pengembangan web. Setiap proyek membawa konteks dan tantangannya sendiri.",
   },
   about: {
     eyebrow: "02 / TENTANG SAYA",
@@ -98,23 +95,19 @@ export const pageContent = {
       firstLine: "Detail yang dipikirkan.",
       accent: "Tujuan yang dijaga.",
     },
-    intro:
-      "Tampilan yang menarik mendapat perhatian. Kejelasan dan kegunaan memberi alasan untuk tetap menggunakannya.",
+    intro: "Tampilan yang menarik mendapat perhatian. Kejelasan dan kegunaan memberi alasan untuk tetap menggunakannya.",
     items: [
       {
         title: "Pahami konteks.",
-        description:
-          "Melihat kebutuhan pengguna, tujuan produk, dan batasan yang perlu dipertimbangkan sebelum menentukan bentuk.",
+        description: "Melihat kebutuhan pengguna, tujuan produk, dan batasan yang perlu dipertimbangkan sebelum menentukan bentuk.",
       },
       {
         title: "Susun pengalaman.",
-        description:
-          "Menghubungkan informasi, alur, dan interaksi agar setiap langkah terasa jelas dan memiliki arah.",
+        description: "Menghubungkan informasi, alur, dan interaksi agar setiap langkah terasa jelas dan memiliki arah.",
       },
       {
         title: "Perhatikan detail.",
-        description:
-          "Menjaga tipografi, ruang, dan konsistensi antarmuka, lalu mengeksplorasi bagaimana desain dapat diwujudkan.",
+        description: "Menjaga tipografi, ruang, dan konsistensi antarmuka, lalu mengeksplorasi bagaimana desain dapat diwujudkan.",
       },
     ],
     toolsLabel: "PERANGKAT KERJA",
@@ -132,8 +125,7 @@ export const pageContent = {
   contact: {
     eyebrow: "05 / MULAI PERCAKAPAN",
     heading: { firstLine: "Punya gagasan?", accent: "Mari bicarakan." },
-    description:
-      "Tentang desain, kolaborasi, atau kesempatan baru—saya senang mendengar cerita Anda.",
+    description: "Tentang desain, kolaborasi, atau kesempatan baru—saya senang mendengar cerita Anda.",
     buttonLabel: "Terhubung di LinkedIn",
     footnote: "IDE YANG BAIK DIMULAI DARI PERCAKAPAN.",
   },
@@ -156,29 +148,24 @@ export const projects: ProjectContent[] = [
     discipline: "UI/UX Design",
     platform: "Aplikasi web · Keuangan internal",
     summary: "Menata kompleksitas keuangan dalam antarmuka yang terstruktur.",
-    description:
-      "Desain aplikasi web untuk pengelolaan keuangan internal perusahaan, dengan tampilan pengajuan, riwayat transaksi, dan laporan dalam satu pengalaman yang konsisten.",
-    context:
-      "Pengelolaan keuangan internal melibatkan informasi yang padat: jenis pengajuan, nominal, perusahaan, dan status proses. Nusafin mengeksplorasi cara menyajikan informasi tersebut dalam alur web yang terorganisir.",
+    description: "Desain aplikasi web untuk pengelolaan keuangan internal perusahaan, dengan tampilan pengajuan, riwayat transaksi, dan laporan dalam satu pengalaman yang konsisten.",
+    context: "Pengelolaan keuangan internal melibatkan informasi yang padat: jenis pengajuan, nominal, perusahaan, dan status proses. Nusafin mengeksplorasi cara menyajikan informasi tersebut dalam alur web yang terorganisir.",
     focus: [
       {
         title: "Hierarki informasi",
-        description:
-          "Ringkasan dan tabel pengajuan menempatkan status serta informasi keuangan dalam kelompok yang mudah ditelusuri.",
+        description: "Ringkasan dan tabel pengajuan menempatkan status serta informasi keuangan dalam kelompok yang mudah ditelusuri.",
       },
       {
         title: "Alur pengajuan",
-        description:
-          "Formulir dibagi menjadi tahapan dengan informasi perusahaan dan detail pembayaran yang terstruktur.",
+        description: "Formulir dibagi menjadi tahapan dengan informasi perusahaan dan detail pembayaran yang terstruktur.",
       },
       {
         title: "Konsistensi antarmuka",
-        description:
-          "Navigasi, komponen formulir, dan pola tampilan dipertahankan di berbagai halaman aplikasi.",
+        description: "Navigasi, komponen formulir, dan pola tampilan dipertahankan di berbagai halaman aplikasi.",
       },
     ],
     cover: "/assets/projects/Project5/Cover5.webp",
-    preview: "/assets/projects/Project5/Thumb1.webp",
+    preview: "/assets/projects/Project5/Cover5.webp",
     images: ["/assets/projects/Project5/Thumb1.webp"],
     tags: ["Figma", "Canva"],
   },
@@ -190,33 +177,25 @@ export const projects: ProjectContent[] = [
     discipline: "Redesign UI/UX",
     platform: "Aplikasi mobile · Layanan jalan tol",
     summary: "Pengalaman mobile untuk perjalanan dan kebutuhan sehari-hari.",
-    description:
-      "Eksplorasi desain ulang aplikasi Nita, mencakup layanan perjalanan, top up Flazz, notifikasi, dan materi informasi di dalam aplikasi.",
-    context:
-      "Aplikasi layanan jalan tol menggabungkan beragam kebutuhan dalam ruang layar yang terbatas. Proyek ini menampilkan eksplorasi antarmuka Nita dan penyajian layanan serta informasi di dalamnya.",
+    description: "Eksplorasi desain ulang aplikasi Nita, mencakup layanan perjalanan, top up Flazz, notifikasi, dan materi informasi di dalam aplikasi.",
+    context: "Aplikasi layanan jalan tol menggabungkan beragam kebutuhan dalam ruang layar yang terbatas. Proyek ini menampilkan eksplorasi antarmuka Nita dan penyajian layanan serta informasi di dalamnya.",
     focus: [
       {
         title: "Akses layanan",
-        description:
-          "Layanan perjalanan dan kebutuhan pembayaran ditempatkan dalam tampilan utama aplikasi mobile.",
+        description: "Layanan perjalanan dan kebutuhan pembayaran ditempatkan dalam tampilan utama aplikasi mobile.",
       },
       {
         title: "Komunikasi visual",
-        description:
-          "Materi informasi dan promosi disesuaikan dengan konteks layar aplikasi.",
+        description: "Materi informasi dan promosi disesuaikan dengan konteks layar aplikasi.",
       },
       {
         title: "Eksplorasi tampilan",
-        description:
-          "Dokumentasi visual menampilkan perbandingan dan pengembangan desain antarmuka.",
+        description: "Dokumentasi visual menampilkan perbandingan dan pengembangan desain antarmuka.",
       },
     ],
     cover: "/assets/projects/Project4/Cover4.webp",
     preview: "/assets/projects/Project4/Cover4.webp",
-    images: [
-      "/assets/projects/Project4/Thumb1.webp",
-      "/assets/projects/Project4/Thumb2.webp",
-    ],
+    images: ["/assets/projects/Project4/Thumb1.webp", "/assets/projects/Project4/Thumb2.webp"],
     tags: ["Figma", "Canva"],
   },
   {
@@ -227,33 +206,25 @@ export const projects: ProjectContent[] = [
     discipline: "Redesign UI/UX",
     platform: "Aplikasi mobile · Parkir digital",
     summary: "Eksplorasi pengalaman parkir melalui desain antarmuka mobile.",
-    description:
-      "Desain ulang antarmuka aplikasi parkir dengan eksplorasi tampilan masuk, riwayat parkir, pencarian, dan pembayaran digital.",
-    context:
-      "Informasi kendaraan, waktu masuk, dan waktu keluar perlu terbaca pada layar mobile. Dokumentasi proyek memperlihatkan pengembangan tampilan masuk serta riwayat parkir melalui perbandingan sebelum dan sesudah.",
+    description: "Desain ulang antarmuka aplikasi parkir dengan eksplorasi tampilan masuk, riwayat parkir, pencarian, dan pembayaran digital.",
+    context: "Informasi kendaraan, waktu masuk, dan waktu keluar perlu terbaca pada layar mobile. Dokumentasi proyek memperlihatkan pengembangan tampilan masuk serta riwayat parkir melalui perbandingan sebelum dan sesudah.",
     focus: [
       {
         title: "Informasi riwayat",
-        description:
-          "Informasi kendaraan dan waktu parkir dikelompokkan dalam tampilan riwayat berbentuk kartu.",
+        description: "Informasi kendaraan dan waktu parkir dikelompokkan dalam tampilan riwayat berbentuk kartu.",
       },
       {
         title: "Tampilan masuk",
-        description:
-          "Eksplorasi halaman login memberi penekanan pada identitas produk dan elemen formulir.",
+        description: "Eksplorasi halaman login memberi penekanan pada identitas produk dan elemen formulir.",
       },
       {
         title: "Perbandingan visual",
-        description:
-          "Tampilan sebelum dan sesudah disajikan untuk memperlihatkan perubahan komposisi antarmuka.",
+        description: "Tampilan sebelum dan sesudah disajikan untuk memperlihatkan perubahan komposisi antarmuka.",
       },
     ],
     cover: "/assets/projects/Project6/Cover6.webp",
     preview: "/assets/projects/Project6/Thumb1.webp",
-    images: [
-      "/assets/projects/Project6/Thumb1.webp",
-      "/assets/projects/Project6/Thumb2.webp",
-    ],
+    images: ["/assets/projects/Project6/Thumb1.webp", "/assets/projects/Project6/Thumb2.webp"],
     tags: ["Figma", "Canva"],
   },
   {
@@ -264,38 +235,27 @@ export const projects: ProjectContent[] = [
     discipline: "UI/UX & Development",
     platform: "Web & mobile · Absensi digital",
     summary: "Pencatatan kehadiran yang terhubung melalui web dan mobile.",
-    description:
-      "Aplikasi pencatatan kehadiran siswa yang mencakup absensi, riwayat, dan laporan, dengan antarmuka web serta mobile.",
-    context:
-      "AbsenKuy mengeksplorasi perpindahan pencatatan kehadiran ke pengalaman digital. Halaman web dan mobile menampilkan kebutuhan utama berupa pencatatan, penelusuran riwayat, serta laporan kehadiran.",
+    description: "Aplikasi pencatatan kehadiran siswa yang mencakup absensi, riwayat, dan laporan, dengan antarmuka web serta mobile.",
+    context: "AbsenKuy mengeksplorasi perpindahan pencatatan kehadiran ke pengalaman digital. Halaman web dan mobile menampilkan kebutuhan utama berupa pencatatan, penelusuran riwayat, serta laporan kehadiran.",
     focus: [
       {
         title: "Pencatatan kehadiran",
-        description:
-          "Antarmuka ditujukan untuk kebutuhan absensi siswa secara digital.",
+        description: "Antarmuka ditujukan untuk kebutuhan absensi siswa secara digital.",
       },
       {
         title: "Web dan mobile",
-        description:
-          "Eksplorasi implementasi menggunakan React untuk web serta Flutter untuk aplikasi mobile.",
+        description: "Eksplorasi implementasi menggunakan React untuk web serta Flutter untuk aplikasi mobile.",
       },
       {
         title: "Riwayat dan laporan",
-        description:
-          "Data kehadiran disajikan melalui tampilan riwayat dan laporan.",
+        description: "Data kehadiran disajikan melalui tampilan riwayat dan laporan.",
       },
     ],
     cover: "/assets/projects/Project2/Cover2.webp",
     preview: "/assets/projects/Project2/Cover2.webp",
-    images: [
-      "/assets/projects/Project2/Thumb1.webp",
-      "/assets/projects/Project2/Thumb2.webp",
-      "/assets/projects/Project2/Thumb3.webp",
-    ],
+    images: ["/assets/projects/Project2/Thumb1.webp", "/assets/projects/Project2/Thumb2.webp", "/assets/projects/Project2/Thumb3.webp"],
     tags: ["React", "Tailwind CSS", "Node.js", "MySQL", "Flutter"],
-    links: [
-      { label: "Buka aplikasi", href: "https://absenkuy-bay.vercel.app/" },
-    ],
+    links: [{ label: "Buka aplikasi", href: "https://absenkuy-bay.vercel.app/" }],
   },
   {
     id: "undangan-digital",
@@ -305,34 +265,25 @@ export const projects: ProjectContent[] = [
     discipline: "Web Development",
     platform: "Website · Proyek personal",
     summary: "Ruang digital untuk berbagi cerita dan merayakan momen personal.",
-    description:
-      "Website undangan pernikahan personal dengan cerita pasangan, galeri foto, RSVP, dan informasi lokasi acara.",
-    context:
-      "Informasi sebuah perayaan perlu disajikan dengan jelas sekaligus terasa personal. Website ini menggabungkan cerita, dokumentasi foto, serta detail acara dalam satu halaman undangan.",
+    description: "Website undangan pernikahan personal dengan cerita pasangan, galeri foto, RSVP, dan informasi lokasi acara.",
+    context: "Informasi sebuah perayaan perlu disajikan dengan jelas sekaligus terasa personal. Website ini menggabungkan cerita, dokumentasi foto, serta detail acara dalam satu halaman undangan.",
     focus: [
       {
         title: "Cerita dan suasana",
-        description:
-          "Cerita pasangan serta galeri foto menjadi bagian dari pengalaman membuka undangan.",
+        description: "Cerita pasangan serta galeri foto menjadi bagian dari pengalaman membuka undangan.",
       },
       {
         title: "Informasi acara",
-        description:
-          "Detail dan peta lokasi membantu tamu menemukan informasi perayaan.",
+        description: "Detail dan peta lokasi membantu tamu menemukan informasi perayaan.",
       },
       {
         title: "Interaksi tamu",
-        description:
-          "Fitur RSVP melengkapi website undangan yang dikembangkan menggunakan HTML, CSS, dan JavaScript.",
+        description: "Fitur RSVP melengkapi website undangan yang dikembangkan menggunakan HTML, CSS, dan JavaScript.",
       },
     ],
     cover: "/assets/projects/Project1/Cover1.webp",
     preview: "/assets/projects/Project1/Cover1.webp",
-    images: [
-      "/assets/projects/Project1/Thumb1.webp",
-      "/assets/projects/Project1/Thumb2.webp",
-      "/assets/projects/Project1/Thumb3.webp",
-    ],
+    images: ["/assets/projects/Project1/Thumb1.webp", "/assets/projects/Project1/Thumb2.webp", "/assets/projects/Project1/Thumb3.webp"],
     tags: ["HTML", "CSS", "JavaScript"],
     links: [
       {
@@ -341,49 +292,41 @@ export const projects: ProjectContent[] = [
       },
     ],
   },
-  {
-    id: "portfolio-v2",
-    title: "Portfolio V2",
-    name: "Portfolio V2",
-    category: "development",
-    discipline: "Web Design & Development",
-    platform: "Website · Portofolio personal",
-    summary: "Eksplorasi awal untuk membangun identitas dan kehadiran digital.",
-    description:
-      "Versi terdahulu website portofolio pribadi yang dikembangkan menggunakan HTML, CSS, dan JavaScript tanpa framework.",
-    context:
-      "Proyek personal ini menjadi ruang eksplorasi desain serta pengembangan web. Karya, keterampilan, dan tautan sosial disusun sebagai bagian dari identitas digital pribadi.",
-    focus: [
-      {
-        title: "Identitas personal",
-        description:
-          "Tampilan website memperkenalkan profil, karya, dan keterampilan.",
-      },
-      {
-        title: "Fondasi web",
-        description:
-          "Pengembangan menggunakan HTML, CSS, dan JavaScript tanpa framework.",
-      },
-      {
-        title: "Perkembangan karya",
-        description:
-          "Dokumentasi portofolio sebelumnya memperlihatkan bagian dari perjalanan eksplorasi web.",
-      },
-    ],
-    cover: "/assets/projects/Project3/Cover3.webp",
-    preview: "/assets/projects/Project3/Cover3.webp",
-    images: [
-      "/assets/projects/Project3/Thumb1.webp",
-      "/assets/projects/Project3/Thumb2.webp",
-    ],
-    tags: ["HTML", "CSS", "JavaScript"],
-    links: [
-      {
-        label: "Buka website",
-        href: "https://pepsodentbiawak.github.io/portofolioV2",
-      },
-    ],
-  },
+  // {
+  //   id: "portfolio-v2",
+  //   title: "Portfolio V2",
+  //   name: "Portfolio V2",
+  //   category: "development",
+  //   discipline: "Web Design & Development",
+  //   platform: "Website · Portofolio personal",
+  //   summary: "Eksplorasi awal untuk membangun identitas dan kehadiran digital.",
+  //   description: "Versi terdahulu website portofolio pribadi yang dikembangkan menggunakan HTML, CSS, dan JavaScript tanpa framework.",
+  //   context: "Proyek personal ini menjadi ruang eksplorasi desain serta pengembangan web. Karya, keterampilan, dan tautan sosial disusun sebagai bagian dari identitas digital pribadi.",
+  //   focus: [
+  //     {
+  //       title: "Identitas personal",
+  //       description: "Tampilan website memperkenalkan profil, karya, dan keterampilan.",
+  //     },
+  //     {
+  //       title: "Fondasi web",
+  //       description: "Pengembangan menggunakan HTML, CSS, dan JavaScript tanpa framework.",
+  //     },
+  //     {
+  //       title: "Perkembangan karya",
+  //       description: "Dokumentasi portofolio sebelumnya memperlihatkan bagian dari perjalanan eksplorasi web.",
+  //     },
+  //   ],
+  //   cover: "/assets/projects/Project3/Cover3.webp",
+  //   preview: "/assets/projects/Project3/Cover3.webp",
+  //   images: ["/assets/projects/Project3/Thumb1.webp", "/assets/projects/Project3/Thumb2.webp"],
+  //   tags: ["HTML", "CSS", "JavaScript"],
+  //   links: [
+  //     {
+  //       label: "Buka website",
+  //       href: "https://pepsodentbiawak.github.io/portofolioV2",
+  //     },
+  //   ],
+  // },
 ];
 
 // ============================================================================
