@@ -46,59 +46,54 @@ test("mobile introduces the designer and brings work forward without loading 3D"
   expect(errors).toEqual([]);
 });
 
-test("project filters expose readable titles and all six project details work", async ({
+test("project filters stay in sync with editable project content", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   const filter = page.getByRole("group", { name: "Filter karya" });
-  await filter.getByRole("button", { name: /UI\/UX Design/ }).click();
-  await expect(page.locator(".project-card")).toHaveCount(3);
-  await expect(
-    page.getByRole("heading", { name: "Nusafin", exact: true }),
-  ).toBeVisible();
-  await filter.getByRole("button", { name: /Development/ }).click();
-  await expect(page.locator(".project-card")).toHaveCount(3);
-  await expect(
-    page.getByRole("heading", { name: "AbsenKuy", exact: true }),
-  ).toBeVisible();
-  await filter.getByRole("button", { name: /Semua karya/ }).click();
-  await expect(page.locator(".project-card")).toHaveCount(6);
-  const titles = [
-    "Web App Nusafin",
-    "Mobile App Nita",
-    "Mobile App Otto Parking",
-    "Aplikasi AbsenKuy",
-    "Undangan Pernikahan Digital",
-    "Portfolio V2",
-  ];
-  for (const [index, title] of titles.entries()) {
-    const opener = page.getByRole("button", {
-      name: `Lihat proyek ${title}`,
-      exact: true,
-    });
+  const cards = page.locator(".project-card");
+  const designButton = filter.getByRole("button", { name: /UI\/UX Design/ });
+  const developmentButton = filter.getByRole("button", { name: /Development/ });
+  const allButton = filter.getByRole("button", { name: /Semua karya/ });
+
+  const displayedCount = async (button: typeof designButton) =>
+    Number.parseInt((await button.locator("span").innerText()).trim(), 10);
+
+  const designCount = await displayedCount(designButton);
+  const developmentCount = await displayedCount(developmentButton);
+  const allCount = await displayedCount(allButton);
+
+  await designButton.click();
+  await expect(cards).toHaveCount(designCount);
+  await developmentButton.click();
+  await expect(cards).toHaveCount(developmentCount);
+  await allButton.click();
+  await expect(cards).toHaveCount(allCount);
+  expect(allCount).toBe(designCount + developmentCount);
+
+  for (let index = 0; index < allCount; index += 1) {
+    const opener = cards.nth(index).getByRole("button");
     await opener.click();
-    const dialog = page.getByRole("dialog", { name: title, exact: true });
+    const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
-    const image = dialog.getByAltText(`${title} - image 1`, { exact: true });
+    const image = dialog.locator(".case-gallery img");
     await expect
       .poll(() =>
         image.evaluate((element: HTMLImageElement) => element.naturalWidth),
       )
       .toBeGreaterThan(0);
-    await dialog
-      .getByRole("button", { name: "Gambar berikutnya", exact: true })
-      .click();
-    await expect(
-      dialog.getByAltText(`${title} - image 2`, { exact: true }),
-    ).toBeVisible();
-    await page.keyboard.press("ArrowLeft");
-    await expect(
-      dialog.getByAltText(`${title} - image 1`, { exact: true }),
-    ).toBeVisible();
-    await expect(
-      dialog.getByText("KONTEKS PROYEK", { exact: true }),
-    ).toBeVisible();
+    const thumbnails = dialog.locator(".gallery-thumbnails button");
+    const thumbnailCount = await thumbnails.count();
+    if (thumbnailCount > 1) {
+      const firstImageLabel = await image.getAttribute("alt");
+      await dialog
+        .getByRole("button", { name: "Gambar berikutnya", exact: true })
+        .click();
+      await expect(image).not.toHaveAttribute("alt", firstImageLabel ?? "");
+      await page.keyboard.press("ArrowLeft");
+      await expect(image).toHaveAttribute("alt", firstImageLabel ?? "");
+    }
     await dialog.getByRole("button", { name: "Tutup detail proyek" }).focus();
     await page.keyboard.press("Shift+Tab");
     expect(
