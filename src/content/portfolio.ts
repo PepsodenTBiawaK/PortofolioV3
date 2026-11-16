@@ -110,8 +110,8 @@ export const pageContent = {
         description: "Menjaga tipografi, ruang, dan konsistensi antarmuka, lalu mengeksplorasi bagaimana desain dapat diwujudkan.",
       },
     ],
-    toolsLabel: "PERANGKAT KERJA",
-    tools: ["Figma", "React", "Next.js", "Flutter", "Git"],
+    toolsLabel: "Tools & Technologies",
+    tools: ["Figma","Laravel","React", "Next.js", "Flutter","Tailwind CSS", "Git", "MySQL"],
   },
   learning: {
     eyebrow: "04 / TERUS BELAJAR",

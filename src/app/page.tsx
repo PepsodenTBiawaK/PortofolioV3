@@ -7,6 +7,9 @@ import {
   SiGit,
   SiGithub,
   SiInstagram,
+  SiLaravel,
+  SiTailwindcss,
+  SiMysql,
 } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import SiteHeader from "@/components/SiteHeader";
@@ -24,10 +27,13 @@ import type { EditorialHeading } from "@/types/content";
 
 const toolIcons: Record<string, typeof SiFigma> = {
   Figma: SiFigma,
+  Laravel: SiLaravel,
   React: SiReact,
   "Next.js": SiNextdotjs,
   Flutter: SiFlutter,
+  "Tailwind CSS": SiTailwindcss,
   Git: SiGit,
+  MySQL: SiMysql,
 };
 const socialItems = [
   { name: "LinkedIn", href: socialLinks.linkedin, Icon: FaLinkedinIn },
