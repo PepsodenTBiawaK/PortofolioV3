@@ -16,7 +16,7 @@
     "@react-three/drei": "10.7.9",
     "@react-three/fiber": "9.8.2",
     "@react-three/rapier": "2.2.0",
-    "geist": "1.9.1",
+    "geist": "1.9.2",
     "meshline": "3.3.1",
     "next": "16.4.5",
     "react": "19.3.1",
